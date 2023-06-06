@@ -1,7 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
-
-// console.log(galleryItems);
 
 const galleryRef = document.querySelector(".gallery");
 
@@ -31,19 +28,20 @@ function handleGalleryItemClick(event) {
     return;
   }
 
-  const instance =
-    basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">
-`);
+  const instance = basicLightbox.create(
+    `<img src="${event.target.dataset.source}" width="800" height="600">
+`,
+    {
+      onShow: () => galleryRef.addEventListener("keydown", handleEscape),
+      onClose: () => galleryRef.removeEventListener("keydown", handleEscape),
+    }
+  );
 
   instance.show();
 
-  galleryRef.addEventListener("keydown", handleEscape);
-
   function handleEscape(event) {
-    if (event.code === "Escape" /* && instance.visible() */) {
-      instance.close(() =>
-        galleryRef.removeEventListener("keydown", handleEscape)
-      );
+    if (event.code === "Escape") {
+      instance.close();
     }
   }
 }

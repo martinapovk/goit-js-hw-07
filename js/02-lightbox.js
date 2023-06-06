@@ -15,14 +15,6 @@ const galleryCode = galleryItems
 
 galleryRef.insertAdjacentHTML("afterbegin", galleryCode);
 
-galleryRef.addEventListener("click", handleGalleryItemClick);
-
-function handleGalleryItemClick(event) {
-  event.preventDefault();
-  if (event.target.nodeName != "IMG") {
-    return;
-  }
-}
 new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
